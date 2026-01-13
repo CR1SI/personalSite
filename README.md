@@ -2,7 +2,8 @@ Feel free to use any code you find useful! All assets...the flower and the vine 
 This site's purpose is for me to have a place I can share my photos and also as a template for my recipes website I will make later this year!
 
 This site is using the following stack:
-For frontend:
+
+For frontend
 
   HTML -> ...
   
@@ -10,7 +11,7 @@ For frontend:
   
   Js -> in-browser functions
 
-For backend:
+For backend
 
   Django w/ python -> backend connectivity through restAPI with CRUD functionality for admin side of the website
   
