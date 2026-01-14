@@ -5,11 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="output.css" rel="stylesheet">
     </head>
-    <body>
-        <h1 class="text-3xl font-bold underline">
-            Front Rooms
-        </h1>
+    <body class="antialiased overflow-hidden no-scrollbar">
+        <div class="w-screen h-screen bg-center bg-cover relative bg-[url(assets/bark.jpg)] flex flex-col">
+            <!-- blur -->
+            <div id="Blur" class="absolute inset-0 backdrop-blur-xs z-10"></div>
+
+            <!-- name -->
+            <div id="Name" class="relative pl-10 pt-7 pb-7 text-5xl md:text-7xl font-bold tracking-wide text-white text-shadow-md text-shadow-blue-900 z-30">
+                <h1>CRISTIAN PADLESKI</h1>
+            </div>
+
+            <!-- photo list -->
+            <div id="Pictures" class="relative pl-5 pr-5 overflow-x-auto grow flex flex-nowrap items-center gap-10 z-30 no-scrollbar">
+                <img src="assets/bark.jpg" class="h-64 md:h-96 w-auto object-contain shadow-2xl">
+
+            </div>
+        </div>
+
+        <!-- vines -->
+        <footer id="VinesContainer" class="absolute backdrop-brightness-50 -bottom-5 w-full z-5 pointer-events-none">
+            <img id="Vine" src="assets/vines.svg" class="brightness-110 w-full h-auto max-w-none">
+        </footer>
+        
     </body>
 </html>
 
-<!--npx @tailwindcss/cli -i style.css -o output.css --watch-->
+<!--
+npx @tailwindcss/cli -i style.css -o output.css --watch
+-->
