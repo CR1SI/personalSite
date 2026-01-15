@@ -2,37 +2,48 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>Photos By Cris</title>
         <link href="output.css" rel="stylesheet">
     </head>
-    <body class="antialiased overflow-hidden no-scrollbar">
-        <div class="w-screen h-screen bg-center bg-cover relative bg-[url(assets/bark.jpg)] flex flex-col">
+    <body class="antialiased overflow-hidden no-scrollbar h-screen w-screen bg-linear-to-t from-[#cbcaa5] via-[#7d9c9e] to-[#334d50] m-0 touch-none">
+        <div class="w-screen h-screen bg-center bg-cover relative flex flex-col">
             <!-- blur -->
             <div id="Blur" class="absolute inset-0 backdrop-blur-xs z-10"></div>
 
             <!-- name -->
-            <div id="Name" class="relative pl-10 pt-7 pb-7 text-5xl md:text-7xl font-bold tracking-wide text-white text-shadow-md text-shadow-blue-900 z-30">
-                <h1>CRISTIAN PADLESKI</h1>
+            <div id="Name" class="relative self-center pl-10 pt-7 pb-7 flex gap-2 text-sm md:text-md font-bold tracking-wide text-white z-30 select-none">
+                <h1 class="text-shadow-xl">CRISTIAN PADLESKI</h1>
+                <h1>|</h1>
+                <h1 class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer active:scale-100 text-shadow-xl">
+                    <a href="gallery.html">
+                        GALLERY
+                    </a>
+                </h1>
             </div>
 
             <!-- photo list -->
-            <div id="Pictures" class="relative pl-5 pr-5 overflow-x-auto grow flex flex-nowrap items-center gap-10 z-30 no-scrollbar">
-                <img src="assets/bark.jpg" class="h-64 md:h-96 w-auto object-contain shadow-2xl">
-
+            <div id="Pictures" draggable="false" style="transform: translate(0%, -65%);" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0" class="z-30 flex gap-4 absolute left-[50%] top-[50%] select-none">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
             </div>
         </div>
 
         <!-- vines -->
-        <footer id="VinesContainer" class="absolute backdrop-brightness-50 -bottom-5 w-full z-5 pointer-events-none">
+        <footer draggable="false" id="VinesContainer" class="absolute backdrop-brightness-50 -bottom-5 w-full z-5">
             <img id="Vine" src="assets/vines.svg" class="brightness-110 w-full h-auto max-w-none">
         </footer>
         
+        <script src="funcs.js"></script>
     </body>
 </html>
 
 <!--
-
-NOTES: I Should take my own picture for the bark!
-
 npx @tailwindcss/cli -i style.css -o output.css --watch
 -->
