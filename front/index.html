@@ -9,11 +9,11 @@
     <body class="antialiased overflow-hidden no-scrollbar h-screen w-screen bg-linear-to-t from-[#cbcaa5] via-[#7d9c9e] to-[#334d50] m-0 touch-none">
         <div class="w-screen h-screen bg-center bg-cover relative flex flex-col">
             <!-- blur -->
-            <div id="Blur" class="absolute inset-0 backdrop-blur-xs z-10"></div>
+            <div id="Blur" class="absolute inset-0 backdrop-blur-sm z-10"></div>
 
             <!-- name -->
-            <div id="Name" class="relative self-center pl-10 pt-7 pb-7 flex gap-2 text-sm md:text-md font-bold tracking-wide text-white z-30 select-none">
-                <h1 class="text-shadow-xl">CRISTIAN PADLESKI</h1>
+            <div id="Name" class="relative self-center pl-10 pt-7 pb-7 flex gap-2 text-sm md:text-lg font-bold tracking-wide text-white z-30 select-none">
+                <h1 class="text-shadow-sm">CRISTIAN PADLESKI</h1>
                 <h1>|</h1>
                 <h1 class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer active:scale-100 text-shadow-xl">
                     <a href="gallery.html">
@@ -22,16 +22,25 @@
                 </h1>
             </div>
 
+            <div id="AboutMe" class="text-white select-none z-30 absolute top-[30%] left-[10%] right-[60%]">
+                <h1 class="text-center font-thin mb-5 text-shadow-2xs">
+                    ABOUT ME
+                </h1>
+                <p class="text-center font-thin">
+                   Hi, I am a software developer who is constantly pushing myself to grow and build new things. Recently, however, I've decided to apply that same curiosity to the visual world by picking up a camera. I absolutely love traveling, and this site serves as the home for that adventure. These pages will host the moments I capture during my journey around the world, as well as my personal journey learning to take photos. Thank you for following along as I explore new places and new perspectives!
+                </p>
+            </div>
+
             <!-- photo list -->
             <div id="Pictures" draggable="false" style="transform: translate(0%, -65%);" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0" class="z-30 flex gap-4 absolute left-[50%] top-[50%] select-none">
-                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img src="assets/testPhoto2.jpg" draggable="false" class="pic shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
+                <img src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
             </div>
         </div>
 
