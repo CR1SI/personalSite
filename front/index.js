@@ -3,6 +3,48 @@ const vine = document.getElementById("Vine");
 const vinesContainer = document.getElementById("VinesContainer");
 const aboutMe = document.getElementById("AboutMe");
 
+var isModalOpen = false;
+//modal stuff
+const modalScreen = document.getElementById("modalScreen");
+const modal = document.getElementById("modal");
+const picture = document.getElementById("picture");
+
+modalScreen.addEventListener('click', closeModal);
+picture.addEventListener('click', openModal);
+
+function openModal(){
+    if (isModalOpen) return;
+    isModalOpen = true;
+
+    modalScreen.classList.remove('hidden');
+    requestAnimationFrame(() => {
+        modalScreen.classList.replace("opacity-0", "opacity-100");
+        modal.classList.replace("scale-0", "scale-100");
+        modal.classList.replace("opacity-0", "opacity-100");
+        
+        modal.classList.add("duration-250");
+        modalScreen.classList.add("duration-250");
+    });
+}
+function closeModal(){
+    if (!isModalOpen) return;
+    isModalOpen = false;
+
+    modal.classList.replace("scale-100", "scale-0");
+    modal.classList.replace("opacity-100", "opacity-0");
+    modalScreen.classList.replace("opacity-100", "opacity-0");
+
+    modal.classList.replace("duration-250", "duration-600");
+    modalScreen.classList.replace("duration-250", "duration-600");
+
+    setTimeout(() => {
+        if (!isModalOpen) {
+            modalScreen.classList.add('hidden');
+        }
+    }, 600);
+}
+//rest
+
 const imageCount = pics.getElementsByClassName("pic").length;
 const maxScroll = -100 * (imageCount - 4);
 const currentPercent = parseFloat(pics.dataset.percentage) || 0;
@@ -182,18 +224,7 @@ function updateAboutMe(normalizedPercent){
     });
 }
 
-const handleOnMove = e => {
-    if(pics.dataset.mouseDownAt === "0") return;
-    
-    const mouseDelta = parseFloat(pics.dataset.mouseDownAt) - e.clientX, maxDelta = window.innerWidth / 2;
-
-    const percentage = (mouseDelta / maxDelta) * -100, 
-    nextPercentUnconstrained = parseFloat(pics.dataset.prevPercentage) + percentage;
-
-    const imageCount = pics.getElementsByClassName("pic").length;
-    const maxScroll = -100 * (imageCount - 5);
-    const nextPercent = Math.max(Math.min(nextPercentUnconstrained, 0), maxScroll);
-
+const updateGallery = (nextPercent) => {
     const currentPercent = parseFloat(pics.dataset.percentage) || 0;
     if(nextPercent === currentPercent) return;
 
@@ -202,6 +233,7 @@ const handleOnMove = e => {
     pics.animate({transform: `translate(${nextPercent}%, -65%)`}, 
         {duration: 2500, fill: "forwards" });
 
+    const imageCount = pics.getElementsByClassName("pic").length;
     const scrollRange = -100 * (imageCount - 5);
     const normalizedPercent = (nextPercent / scrollRange) * -100;
     
@@ -217,6 +249,23 @@ const handleOnMove = e => {
     updateAboutMe(Math.abs(normalizedPercent));
 }
 
+const handleOnMove = e => {
+    if(isModalOpen) return;
+    if(pics.dataset.mouseDownAt === "0") return;
+    
+    const mouseDelta = parseFloat(pics.dataset.mouseDownAt) - e.clientX, 
+          maxDelta = window.innerWidth / 2;
+
+    const percentage = (mouseDelta / maxDelta) * -100, 
+          nextPercentUnconstrained = parseFloat(pics.dataset.prevPercentage) + percentage;
+
+    const imageCount = pics.getElementsByClassName("pic").length;
+    const maxScroll = -100 * (imageCount - 5);
+    const nextPercent = Math.max(Math.min(nextPercentUnconstrained, 0), maxScroll);
+
+    updateGallery(nextPercent);
+}
+
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 document.addEventListener('dragstart', (e) => {
     if(e.target.nodeName === 'IMG') {
@@ -225,6 +274,46 @@ document.addEventListener('dragstart', (e) => {
 });
 window.ondragstart = function() { return false; };
 
+window.onwheel = e => {
+    if(isModalOpen) return;
+
+    const scrollSpeed = 0.1;
+    const currentPercent = parseFloat(pics.dataset.percentage) || 0;
+
+    const nextPercentUnconstrained = currentPercent + e.deltaY * -scrollSpeed;
+
+    const imgCount = pics.getElementsByClassName("pic").length;
+    const maxScroll = -100 * (imgCount - 5);
+    const nextPercent = Math.max(Math.min(nextPercentUnconstrained, 0), maxScroll);
+
+    updateGallery(nextPercent);
+
+    pics.dataset.prevPercentage = nextPercent;
+}
+
+//populatingModal
+function populateModal(data){
+    document.getElementById("imageTitle").textContent = data.title;
+    document.getElementById("imageLocation").textContent = data.location;
+    document.getElementById("imageDescription").textContent = data.description;
+    document.getElementById("imageSrc").src = data.imageSrc;
+
+    const metaList = document.getElementById("metaList");
+    metaList.innerHTML = "";
+
+    Object.entries(data.metadata).forEach(([label, value]) => {
+        const dt = document.createElement("dt");
+        dt.textContent = label;
+
+        const dd = document.createElement("dd");
+        dd.textContent = value;
+
+        metaList.appendChild(dt);
+        metaList.appendChild(dd);
+    })
+}
+
+//not working mobile stuff
 window.onmousedown = e => handleOnDown(e);
 window.ontouchstart = e => handleOnDown(e.touches[0]);
 window.onmouseup = e => handleOnUp(e);
