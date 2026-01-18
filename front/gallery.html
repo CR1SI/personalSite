@@ -5,10 +5,125 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gallery By Cris</title>
         <link href="output.css" rel="stylesheet">
+
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+        <link rel="apple-touch-icon" size="180x180" href="assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" size="192x192" href="assets/favicon-192x192.png">
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     </head>
-    <body>
-        <h1 class="text-3xl font-bold underline">
-            Gallery
-        </h1>
+    <body class="antialiased overflow-hidden no-scrollbar h-screen w-screen bg-linear-to-t backdrop-brightness-50 from-[#cbcaa5] via-[#7d9c9e] to-[#334d50] m-0 touch-none">
+        <div class="w-screen h-screen bg-center bg-cover relative flex flex-col">
+
+            <!-- blur -->
+            <div id="Blur" class="absolute inset-0 backdrop-blur-sm z-10"></div>
+
+            <!-- categories -->
+            <div id="categories"
+                class="relative items-center justify-center pt-7 pb-7 flex text-sm md:text-lg font-bold text-balance tracking-wide text-white z-30 select-none">
+                <div class="flex flex-row items-center justify-center">
+                    <h1
+                        class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100 text-shadow-xl">
+                        <a href="index.html">
+                            HOME
+                        </a>
+                    </h1>
+                    <h1 class="mx-3 md:mx-4">|</h1>
+                    <div class="flex flex-row gap-10 md:gap-15">
+                        <h1 id="nature"
+                            class="cat-btn hover:scale-110 transition ease-in-out duration-150 cursor-pointer active:scale-100 text-shadow-xl">
+                            NATURE
+                        </h1>
+                        <h1 id="people"
+                            class="cat-btn hover:scale-110 transition ease-in-out duration-150 cursor-pointer active:scale-100 text-shadow-xl">
+                            PEOPLE
+                        </h1>
+                        <h1 id="conceptual"
+                            class="cat-btn hover:scale-110 transition ease-in-out duration-150 cursor-pointer active:scale-100 text-shadow-xl">
+                            CONCEPTUAL
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- category -->
+             <div id="currentCategory" class="absolute top-1/2 -translate-y-1/2 left-10 text-white text-7xl md:text-9xl text-center text-shadow-2xs [writing-mode:vertical-rl] font-thin select-none z-30">
+                <h1>
+                    NATURE
+                </h1>
+            </div>
+
+            <!-- photos -->
+            <div id="Pictures" draggable="false" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0" class="no-scrollbar z-30 select-none overflow-visible grid grid-rows-2 grid-flow-col auto-cols-max gap-x-20 gap-y-20 absolute left-100 top-[50%] -translate-y-1/2 px-4">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin] object-cover object-center">
+            </div>
+
+            <!-- modal -->
+            <div id="modalScreen" draggable="false" class="opacity-0 w-screen h-screen items-center justify-center fixed top-0 left-0 bg-black/50 z-200 hidden">
+                <div id="modal" draggable="false" class="bg-white scale-0 opacity-0 flex shadow-2xl p-5 w-300 max-w-full pointer-events-auto select-none">
+                    <div class="mr-5">
+                        <h1 id="imageTitle" class="text-left text-2xl">
+                            SomeWhere Somewhen
+                        </h1>
+                        <h2 id="imageLocation">
+                            Miami, USA
+                        </h2>
+                        <br>
+                        <h1 id="imageDescription" class="text-left text-sm text-gray-700">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper elit vel est laoreet ultricies. Donec id turpis eget dolor gravida egestas.
+                        </h1>
+                        <br>
+                        <div>
+                            <dl id="metaList" class="grid grid-cols-2 text-sm text-gray-700 gap-5">
+                                <dt>Camera</dt>
+                                <dd>Canon Rebel T7</dd>
+
+                                <dt>Lens</dt>
+                                <dd>18.0-55.0mm f/3.5</dd>
+
+                                <dt>Focal Length</dt>
+                                <dd>55.0mm</dd>
+
+                                <dt>Aperture</dt>
+                                <dd>f/4.0</dd>
+
+                                <dt>Exposure Time</dt>
+                                <dd>1/250s</dd>
+
+                                <dt>ISO</dt>
+                                <dd>100</dd>
+
+                                <dt>Date Taken</dt>
+                                <dd>04/13/26</dd>
+                                
+                                <dt>Author</dt>
+                                <dd>Cristian Padleski</dd>
+
+                                <dt>File Size</dt>
+                                <dd>10.34MB</dd>
+
+                                <dt>Dimensions</dt>
+                                <dd>4000x5800</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <img id="imageSrc" src="assets/testPhoto2.jpg" class="ml-auto">
+                </div>
+        </div>
+        
+        <script type="module" src="gallery.js"></script>
     </body>
 </html>

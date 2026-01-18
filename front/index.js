@@ -1,48 +1,34 @@
+import { openModal, closeModal, populateModal, populatePictures, fetchData} from "./crisiLibrary.js";
+
 const pics = document.getElementById("Pictures");
 const vine = document.getElementById("Vine");
 const vinesContainer = document.getElementById("VinesContainer");
 const aboutMe = document.getElementById("AboutMe");
 
-var isModalOpen = false;
+
 //modal stuff
 const modalScreen = document.getElementById("modalScreen");
 const modal = document.getElementById("modal");
-const picture = document.getElementById("picture");
 
-modalScreen.addEventListener('click', closeModal);
-picture.addEventListener('click', openModal);
+let isModalOpen = false;
 
-function openModal(){
-    if (isModalOpen) return;
-    isModalOpen = true;
+pics.addEventListener("click", (e) => {
+    if(e.target.classList.contains("pic")) {
+        const photoID = e.target.dataset.id;
+        isModalOpen = true;
 
-    modalScreen.classList.remove('hidden');
-    requestAnimationFrame(() => {
-        modalScreen.classList.replace("opacity-0", "opacity-100");
-        modal.classList.replace("scale-0", "scale-100");
-        modal.classList.replace("opacity-0", "opacity-100");
-        
-        modal.classList.add("duration-250");
-        modalScreen.classList.add("duration-250");
-    });
-}
-function closeModal(){
-    if (!isModalOpen) return;
+        console.log("photo id - " + photoID);
+        //add fetching function here
+        //add populate modal function here
+
+        openModal(modal, modalScreen);
+    }
+});
+
+modalScreen.addEventListener('click', () => {
     isModalOpen = false;
-
-    modal.classList.replace("scale-100", "scale-0");
-    modal.classList.replace("opacity-100", "opacity-0");
-    modalScreen.classList.replace("opacity-100", "opacity-0");
-
-    modal.classList.replace("duration-250", "duration-600");
-    modalScreen.classList.replace("duration-250", "duration-600");
-
-    setTimeout(() => {
-        if (!isModalOpen) {
-            modalScreen.classList.add('hidden');
-        }
-    }, 600);
-}
+    closeModal(modal, modalScreen);
+});
 //rest
 
 const imageCount = pics.getElementsByClassName("pic").length;
@@ -289,28 +275,6 @@ window.onwheel = e => {
     updateGallery(nextPercent);
 
     pics.dataset.prevPercentage = nextPercent;
-}
-
-//populatingModal
-function populateModal(data){
-    document.getElementById("imageTitle").textContent = data.title;
-    document.getElementById("imageLocation").textContent = data.location;
-    document.getElementById("imageDescription").textContent = data.description;
-    document.getElementById("imageSrc").src = data.imageSrc;
-
-    const metaList = document.getElementById("metaList");
-    metaList.innerHTML = "";
-
-    Object.entries(data.metadata).forEach(([label, value]) => {
-        const dt = document.createElement("dt");
-        dt.textContent = label;
-
-        const dd = document.createElement("dd");
-        dd.textContent = value;
-
-        metaList.appendChild(dt);
-        metaList.appendChild(dd);
-    })
 }
 
 //not working mobile stuff
