@@ -13,7 +13,7 @@ For frontend
 
 For backend
 
-  Django w/ python -> backend connectivity through restAPI with CRUD functionality for admin side of the website
+  FASTapi -> backend connectivity through restAPI with CRUD functionality for admin side of the website
   
   PostgresQL -> storing picture data (ez setup with django)
   
