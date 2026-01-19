@@ -3,12 +3,142 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Backrooms By Cris</title>
+        <title>BackRooms By Cris</title>
         <link href="output.css" rel="stylesheet">
+
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+        <link rel="apple-touch-icon" size="180x180" href="assets/apple-touch-icon.png">
+        <link rel="icon" type="image/png" size="192x192" href="assets/favicon-192x192.png">
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     </head>
-    <body>
-        <h1 class="text-3xl font-bold underline">
-            Back Rooms
-        </h1>
+    <body class="antialiased overflow-hidden h-screen w-screen bg-linear-to-t backdrop-brightness-50 from-[#cbcaa5] via-[#7d9c9e] to-[#334d50] m-0">
+
+        <!-- HEADER -->
+        <header class="relative w-screen h-20 text-white select-none">
+            <nav class="items-center justify-center flex gap-20 py-10 text-3xl font-thin">
+                <ul class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100 text-shadow-xl text-center">
+                    <a href="index.html">
+                        HOME
+                    </a>
+                </ul>
+                <ul id="addPic" class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100 text-shadow-xl text-center">
+                    <a class="p-2 border-2 rounded-4xl text-center text-xl">
+                        ADD PICTURE
+                    </a>
+                </ul>
+                <ul class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100 text-shadow-xl">
+                    <a href="gallery.html">
+                        GALLERY
+                    </a>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- PICTURES -->
+         <div id="Pictures" draggable="false" class="relative h-[90%] w-screen p-10 grid overflow-y-scroll overflow-x-hidden justify-center items-center grid-cols-4 place-items-center gap-10 gap-x-0 scroll-smooth select-none">
+            
+            <div class="relative group w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin]">
+                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false"
+                    class="pic shadow-2xl select-none w-full h-full object-cover object-center">
+                <div class="absolute inset-0 flex flex-col justify-between p-2 pointer-events-none">
+                    <div class="flex justify-start">
+                        <button onclick="toggleStar('5243624', event)"
+                            class="pointer-events-auto text-5xl transition-colors duration-200 focus:outline-none">
+                            <span class="star-icon text-gray-400 hover:text-yellow-400">★</span>
+                        </button>
+                    </div>
+                    <div class="flex justify-end">
+                        <button onclick="deleteImage('5243624', event)"
+                            class="pointer-events-auto bg-black/50 hover:bg-red-600 text-white text-xl px-2 py-1 rounded border border-white/40 transition-colors">
+                            DEL
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+         </div>
+
+         <!-- ADD PICTURE MODAL -->
+          <div id="modalScreen" draggable="false" class="absolute top-0 opacity-0 w-screen h-screen items-center justify-center bg-black/50 z-200 hidden">
+            <div id="modal" draggable="false" class="bg-white scale-0 opacity-0 flex flex-col shadow-2xl w-225 h-125 select-none p-5">
+
+                <button onclick="closeM()" aria-label="Close" class="text-4xl self-end mx-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">&times;</button>
+
+                <div class="w-200 h-100 self-center flex">
+                    <form method="post" class="grid grid-cols-3 grid-rows-1 w-200 gap-5 content-center justify-center">
+                        <div class="flex flex-col gap-10 self-center">
+                            <div class="flex flex-col gap-2">
+                                <input type="text" id="picture_name" name="picture_name" placeholder=" Picture Name" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                                <input type="text" id="location" name="location" placeholder=" Location" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                                <input type="text" id="description" name="description" placeholder=" Description" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            </div>
+                            <div>
+                                <h1>
+                                    Picture category:
+                                </h1>
+                                <div class="hover:scale-110 transition ease-in-out duration-150 text-balance active:scale-100">
+                                    <input type="radio" id="nature" name="category" required value="Nature">
+                                    <label for="nature" >Nature</label><br>
+                                </div>
+                                <div class="hover:scale-110 transition ease-in-out duration-150 text-balance active:scale-100">
+                                    <input type="radio" id="people" name="category" required value="People">
+                                    <label for="people" >People</label><br>
+                                </div>
+                                <div class="hover:scale-110 transition ease-in-out duration-150 text-balance active:scale-100">
+                                    <input type="radio" id="conceptual" name="category" required value="Conceptual">
+                                    <label for="conceptual" >Conceptual</label><br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-10 self-center">
+                            <input type="text" id="lens" name="metadata" placeholder=" Lens" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            <input type="text" id="focal_length" name="metadata" placeholder=" Focal Length" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            <input type="text" id="aperture" name="metadata" placeholder=" Aperture" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            <input type="text" id="exposure_time" name="metadata" placeholder=" Exposure Time" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            <input type="text" id="iso" name="metadata" placeholder=" ISO" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            <input type="text" id="date taken" name="metadata" placeholder=" Date Taken" required class="bg-gray-200 border rounded-xl h-10 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                        </div>
+
+                        <div class="flex self-center flex-col gap-10">
+                            <div class="w-full">
+                                <label for="file_upload">Select file to upload:</label>
+                                <input type="file" id="file_upload" name="fileToUpload" accept=".jpg, .jpeg, image/jpeg" class="h-[20%] rounded-full w-full text-center p-2 border bg-gray-200 hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            </div>
+                            <div class="flex justify-center">
+                                <input type="submit" value="Submit" class="border bg-gray-200 text-2xl text-center p-2 rounded-full hover:scale-110 transition ease-in-out duration-150 cursor-pointer text-balance active:scale-100">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+
+         <script type="module" src="backRooms.js"></script>
     </body>
 </html>
+
+<!-- 
+{
+  "id": 3758,
+  "favorite": no,
+  "category": "Nature",
+  "title": "Mountain Sunrise",
+  "location": "Swiss Alps",
+  "description": "A cold morning hike worth every second.",
+  "imageSrc": "link post cloudinary",
+  "metadata": {
+    "Camera": "Canon Rebel T7",
+    "Lens": "18-55mm",
+    "Focal Length": "55mm",
+    "Aperture": "f/4.0",
+    "Exposure Time": "1/250s",
+    "ISO": "100",
+    "Date Taken": "04/13/26",
+    "Author": "Cristian Padleski",
+    "File Size": "54.3MB",
+    "Dimensions": "4000x5800"
+  }
+}
+-->

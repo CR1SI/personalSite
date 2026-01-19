@@ -70,6 +70,43 @@ export function populatePicturesGallery(data){
     picContainer.appendChild(frag);
 }
 
+export function populatePicturesAdmin(data) {
+  const picContainer = document.getElementById("Pictures");
+  if (!picContainer) return;
+
+  const frag = document.createDocumentFragment();
+
+  data.forEach((item) => {
+    const wrapper = document.createElement("div");
+    wrapper.className =
+      "relative group w-[50vmin] h-[50vmin] sm:w-[26vmin] sm:h-[26vmin]";
+
+    wrapper.innerHTML = `
+            <img data-id="${item.id}" src="${item.imageSrc}" draggable="false"
+                class="pic shadow-2xl select-none w-full h-full object-cover object-center">
+            
+            <div class="absolute inset-0 flex flex-col justify-between p-2 pointer-events-none">
+                <div class="flex justify-start">
+                    <button onclick="toggleStar('${item.id}', event)"
+                        class="pointer-events-auto text-5xl transition-colors duration-200 focus:outline-none">
+                        <span class="star-icon text-gray-400 hover:text-yellow-400">★</span>
+                    </button>
+                </div>
+                <div class="flex justify-end">
+                    <button onclick="deleteImage('${item.id}', event)"
+                        class="pointer-events-auto bg-black/50 hover:bg-red-600 text-white text-xl px-2 py-1 rounded border border-white/40 transition-colors">
+                        DEL
+                    </button>
+                </div>
+            </div>
+        `;
+
+    frag.appendChild(wrapper);
+  });
+
+  picContainer.appendChild(frag);
+}
+
 export function populateModal(data){
     document.getElementById("imageTitle").textContent = data.title;
     document.getElementById("imageLocation").textContent = data.location;
