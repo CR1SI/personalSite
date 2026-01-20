@@ -41,14 +41,6 @@
 
             <!-- photo list -->
             <div id="Pictures" draggable="false" style="transform: translate(0%, -65%);" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0" class="z-30 flex gap-4 absolute left-[50%] top-[50%] select-none">
-                <img data-id="6546456" id="picture" src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="645645" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="535353" id="picture" src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="23423" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="31231" id="picture" src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="5436" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="632456" id="picture" src="assets/testPhoto.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
-                <img data-id="5243624" id="picture" src="assets/testPhoto2.jpg" draggable="false" class="pic hover:scale-110 active:scale-100 transition duration-150 ease-in-out shadow-2xl select-none w-[70vmin] h-[70vmin] sm:w-[46vmin] sm:h-[46vmin] object-cover object-center">
             </div>
 
             <div id="modalScreen" draggable="false" class="opacity-0 w-screen h-screen items-center justify-center fixed top-0 left-0 bg-black/50 z-200 hidden">
@@ -99,8 +91,10 @@
                             </dl>
                         </div>
                     </div>
-
-                    <img id="imageSrc" src="assets/testPhoto2.jpg" class="ml-auto">
+                    <div class="flex-1 flex items-center justify-center rounded overflow-hidden">
+                        <img id="imageSrc" src="assets/testPhoto2.jpg" class="max-w-full max-h-[60vh] md:max-h-[75vh] w-auto h-auto object-contain shadow-sm">
+                    </div>
+                    
                 </div>
             </div>
         </div>

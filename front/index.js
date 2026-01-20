@@ -1,10 +1,34 @@
-import { openModal, closeModal, populateModal, populatePictures, fetchData} from "./crisiLibrary.js";
+import { openModal, closeModal, populateModal, populatePictures} from "./crisiLibrary.js";
 
 const pics = document.getElementById("Pictures");
 const vine = document.getElementById("Vine");
 const vinesContainer = document.getElementById("VinesContainer");
 const aboutMe = document.getElementById("AboutMe");
 
+let maxScroll = 0;
+
+async function initPhotos(){
+    const data = await populatePictures();
+
+    const images = pics.getElementsByClassName("pic");
+    const imageCount = images.length;
+
+    maxScroll = imageCount > 4 ? -100 * (imageCount - 4) : 0;
+
+    const currentPercent = parseFloat(pics.dataset.percentage) || 0;
+    if (maxScroll !== 0) {
+        const normalizedPercent = (currentPercent / maxScroll) * -100;
+        for (const image of images) {
+            image.style.objectPosition = `${100 + normalizedPercent}% center`;
+        }
+        vine.style.clipPath = `inset(0 ${100 - normalizedPercent}% 0 0)`;
+    } else {
+        for (const image of images) {
+            image.style.objectPosition = `center center`;
+        }
+        vine.style.clipPath = `inset(0 0 0 0)`;
+    }
+}
 
 //modal stuff
 const modalScreen = document.getElementById("modalScreen");
@@ -18,8 +42,7 @@ pics.addEventListener("click", (e) => {
         isModalOpen = true;
 
         console.log("photo id - " + photoID);
-        //add fetching function here
-        //add populate modal function here
+        populateModal(Number(photoID))
 
         openModal(modal, modalScreen);
     }
@@ -30,18 +53,6 @@ modalScreen.addEventListener('click', () => {
     closeModal(modal, modalScreen);
 });
 //rest
-
-const imageCount = pics.getElementsByClassName("pic").length;
-const maxScroll = -100 * (imageCount - 4);
-const currentPercent = parseFloat(pics.dataset.percentage) || 0;
-const normalizedPercent = (currentPercent / maxScroll) * -100;
-
-for(const image of pics.getElementsByClassName("pic")){
-    image.style.objectPosition = `${100 + normalizedPercent}% center`;
-}
-
-vine.style.clipPath = `inset(0 ${100 - normalizedPercent}% 0 0)`;
-vine.style.maskImage = `linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)`;
 
 const rosePositions = [
     { position: 20, triggerPercent: -25, bottomOffset: 3.25},
@@ -220,7 +231,12 @@ const updateGallery = (nextPercent) => {
         {duration: 2500, fill: "forwards" });
 
     const imageCount = pics.getElementsByClassName("pic").length;
-    const scrollRange = -100 * (imageCount - 5);
+    const scrollRange = imageCount > 4 ? -100 * (imageCount - 4) : 0;
+
+    if (scrollRange === 0) {
+        pics.style.transform = `translate(0%, -65%)`; // Keep it centered
+        return;
+    }
     const normalizedPercent = (nextPercent / scrollRange) * -100;
     
     for(const image of pics.getElementsByClassName("pic")){
@@ -246,7 +262,7 @@ const handleOnMove = e => {
           nextPercentUnconstrained = parseFloat(pics.dataset.prevPercentage) + percentage;
 
     const imageCount = pics.getElementsByClassName("pic").length;
-    const maxScroll = -100 * (imageCount - 5);
+    const maxScroll = imageCount > 4 ? -100 * (imageCount - 4) : 0;
     const nextPercent = Math.max(Math.min(nextPercentUnconstrained, 0), maxScroll);
 
     updateGallery(nextPercent);
@@ -269,13 +285,17 @@ window.onwheel = e => {
     const nextPercentUnconstrained = currentPercent + e.deltaY * -scrollSpeed;
 
     const imgCount = pics.getElementsByClassName("pic").length;
-    const maxScroll = -100 * (imgCount - 5);
+    const maxScroll = imgCount > 4 ? -100 * (imgCount - 4) : 0;
     const nextPercent = Math.max(Math.min(nextPercentUnconstrained, 0), maxScroll);
 
     updateGallery(nextPercent);
 
     pics.dataset.prevPercentage = nextPercent;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    initPhotos();
+});
 
 //not working mobile stuff
 window.onmousedown = e => handleOnDown(e);

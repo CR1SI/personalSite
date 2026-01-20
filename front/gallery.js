@@ -1,4 +1,4 @@
-import { openModal, closeModal, populateModal, populatePicturesGallery, fetchData } from "./crisiLibrary.js";
+import { openModal, closeModal, populateModal, populatePicturesGallery } from "./crisiLibrary.js";
 
 const pics = document.getElementById("Pictures");
 const modalScreen = document.getElementById("modalScreen");
@@ -6,7 +6,7 @@ const modal = document.getElementById("modal");
 
 const currentCategory = document.getElementById("currentCategory");
 
-let currentCat = currentCategory.querySelector("h1").textContent.toUpperCase();
+let currentCat = currentCategory.querySelector("h1").textContent.trim().toUpperCase();
 let isModalOpen = false;
 
 // category switching handlers
@@ -16,14 +16,17 @@ document.querySelectorAll(".cat-btn").forEach(btn => {
     });
 });
 
+async function initPhotos(){
+    await populatePicturesGallery(currentCat);
+}
+
 pics.addEventListener("click", (e) => {
     if(e.target.classList.contains("pic")) {
         const photoID = e.target.dataset.id;
         isModalOpen = true;
 
         console.log("photo id - " + photoID);
-        //add fetching function here
-        //add populate modal function here
+        populateModal(Number(photoID))
 
         openModal(modal, modalScreen);
     }
@@ -126,7 +129,7 @@ function updateCategory(newCat){
 
         fadeCurrentCategory(0);
 
-        //later call 'populatePictures(currentCat)' here
+        populatePicturesGallery(currentCat)
     }
 }
 
@@ -137,6 +140,10 @@ document.addEventListener('dragstart', (e) => {
     }
 });
 window.ondragstart = function() { return false; };
+
+document.addEventListener("DOMContentLoaded", () => {
+    initPhotos();
+});
 
 window.onmousedown = e => handleOnDown(e);
 window.ontouchstart = e => handleOnDown(e.touches[0]);

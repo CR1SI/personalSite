@@ -1,5 +1,6 @@
-import {openModal, closeModal, fetchData, populatePicturesAdmin } from "./crisiLibrary.js";
+import {openModal, closeModal, populatePicturesAdmin } from "./crisiLibrary.js";
 
+const uploadForm = document.getElementById('uploadForm');
 const addPic = document.getElementById("addPic");
 const modal = document.getElementById("modal");
 let isModalOpen = false;
@@ -21,7 +22,29 @@ async function toggleStar(id, ev){
         console.log("starring " + id);
         topPics.push(id);
 
-        //add to database
+        //update starred database
+        try {
+          const response = await fetch(
+            `http://127.0.0.1:8000/photos/${Number(id)}/favorite`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({}),
+            },
+          );
+          if (response.ok) {
+            const data = await response.json();
+            console.log("updated successfully:", data);
+          } else {
+            const errorData = await response.json();
+            alert("Error updating photo: " + errorData.detail);
+          }
+        } catch (error) {
+          console.error("Network error:", error);
+          alert("Could not connect to the server.");
+        }
 
         starIcon.classList.replace('text-gray-400', 'text-yellow-400');
         starIcon.classList.replace('hover:text-yellow-400', 'hover:text-gray-400');
@@ -30,7 +53,29 @@ async function toggleStar(id, ev){
         console.log("unstarring " + id);
         topPics.splice(index, 1);
 
-        //take out of database for starred images
+        //update starred images
+        try {
+          const response = await fetch(
+            `http://127.0.0.1:8000/photos/${Number(id)}/favorite`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({}),
+            },
+          );
+          if (response.ok) {
+            const data = await response.json();
+            console.log("updated successfully:", data);
+          } else {
+            const errorData = await response.json();
+            alert("Error updating photo: " + errorData.detail);
+          }
+        } catch (error) {
+          console.error("Network error:", error);
+          alert("Could not connect to the server.");
+        }
 
         starIcon.classList.replace('text-yellow-400', 'text-gray-400');
         starIcon.classList.replace('hover:text-gray-400', 'hover:text-yellow-400');
@@ -38,21 +83,88 @@ async function toggleStar(id, ev){
     
 }
 
-async function deleteImage(id, ev){
-    console.log("deleting " + id);
-    const container = ev.currentTarget.closest('.relative.group');
+async function deleteImage(id, ev) {
+  console.log("deleting " + id);
+  const container = ev.currentTarget.closest(".relative.group");
 
-    if(container){
-        container.style.transition = 'opacity 0.2s ease';
-        container.style.opacity = '0';
+  if (container) {
+    container.style.transition = "opacity 0.2s ease";
+    container.style.opacity = "0";
 
-        setTimeout(() => {
-            container.remove();
-        }, 200)
+    setTimeout(() => {
+      container.remove();
+    }, 200);
+  }
+
+  //delete from databases
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/photos/${Number(id)}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Deleted successfully:", data);
+    } else {
+      const errorData = await response.json();
+      alert("Error deleting photo: " + errorData.detail);
+    }
+  } catch (error) {
+    console.error("Network error:", error);
+    alert("Could not connect to the server.");
+  }
+}
+
+uploadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const fileInput = uploadForm.querySelector('input[type="file"]');
+    const file = fileInput.files[0];
+
+    const MAX_SIZE = 10 * 1024 * 1024;
+
+    if (file && file.size > MAX_SIZE) {
+        alert(`File is too large (${(file.size / (1024 * 1024)).toFixed(2)}MB). Max limit is 10MB.`);
+        return;
     }
 
-    //delete from main database
-}
+    const formData = new FormData(uploadForm);
+
+    try{
+        const response = await fetch("http://127.0.0.1:8000/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        if(response.ok){
+            const data = await response.json();
+            console.log("upload success: ", data);
+
+            isModalOpen = false;
+            closeModal(modal, modalScreen)
+
+            uploadForm.reset();
+            populatePicturesAdmin();
+        }else{
+            alert("Upload failed. Check console for details.");
+        }
+    }catch(error){
+        console.error("Error: ", error);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const data = await populatePicturesAdmin();
+  if (data) {
+    topPics = data
+      .filter((item) => item.favorite === true)
+      .map((item) => String(item.id));
+
+    console.log("Synced starred photos: ", topPics);
+  }
+});
 
 window.toggleStar = toggleStar;
 window.deleteImage = deleteImage;

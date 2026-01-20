@@ -15,3 +15,4 @@ class Photos(Base):
     description = Column(String)
     img_src = Column(String)
     photo_metadata = Column(JSONB)
+    cloudinary_id = Column(String)

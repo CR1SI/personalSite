@@ -15,21 +15,23 @@ cloudinary.config(
     secure = True
 )
 
-def url_converter(file_object):
-    if hasattr(file_object, "file"):
-        source = file_object.file
-    else:
-        source = file_object
-    
+def url_converter(source):
     try:
         upload_result = cloudinary.uploader.upload(source)
-
         optimized_url, _ = cloudinary_url(
             upload_result["public_id"],
             fetch_format = "auto",
-            quality = "auto"
+            quality = "auto:best"
         )
-        return optimized_url
+        return [optimized_url, upload_result["public_id"]]
     except Exception as e:
         print(f"Cloudinary Error: {e}")
+        return None
+
+def deleteById(id):
+    try:
+        response = cloudinary.uploader.destroy(id)
+        return response
+    except Exception as e:
+        print(f"Error deleting from Cloudinary: {e}")
         return None
