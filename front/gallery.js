@@ -1,4 +1,4 @@
-import { openModal, closeModal, populateModal, populatePicturesGallery } from "./crisiLibrary.js";
+import { openModal, closeModal, populateModal, populatePicturesGallery} from "./crisiLibrary.js";
 
 const pics = document.getElementById("Pictures");
 const modalScreen = document.getElementById("modalScreen");

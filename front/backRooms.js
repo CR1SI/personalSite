@@ -1,4 +1,4 @@
-import {openModal, closeModal, populatePicturesAdmin } from "./crisiLibrary.js";
+import {openModal, closeModal, populatePicturesAdmin, API_BASE } from "./crisiLibrary.js";
 
 const uploadForm = document.getElementById('uploadForm');
 const addPic = document.getElementById("addPic");
@@ -25,7 +25,7 @@ async function toggleStar(id, ev){
         //update starred database
         try {
           const response = await fetch(
-            `http://127.0.0.1:8000/photos/${Number(id)}/favorite`,
+            API_BASE + `/photos/${Number(id)}/favorite`,
             {
               method: "PATCH",
               headers: {
@@ -56,7 +56,7 @@ async function toggleStar(id, ev){
         //update starred images
         try {
           const response = await fetch(
-            `http://127.0.0.1:8000/photos/${Number(id)}/favorite`,
+            API_BASE + `/photos/${Number(id)}/favorite`,
             {
               method: "PATCH",
               headers: {
@@ -98,7 +98,7 @@ async function deleteImage(id, ev) {
 
   //delete from databases
   try {
-    const response = await fetch(`http://127.0.0.1:8000/photos/${Number(id)}`, {
+    const response = await fetch(API_BASE + `/photos/${Number(id)}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -133,7 +133,7 @@ uploadForm.addEventListener('submit', async (e) => {
     const formData = new FormData(uploadForm);
 
     try{
-        const response = await fetch("http://127.0.0.1:8000/upload", {
+        const response = await fetch(API_BASE + "/upload", {
             method: "POST",
             body: formData,
         });

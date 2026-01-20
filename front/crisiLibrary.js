@@ -22,6 +22,8 @@
 }
 */
 
+export const API_BASE = "https://personalsite-production-d831.up.railway.app/"
+
 async function fetchData(){
     try {
     const response = await fetch(`http://127.0.0.1:8000/photos`, {
