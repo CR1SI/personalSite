@@ -22,11 +22,11 @@
 }
 */
 
-export const API_BASE = "https://personalsite-production-d831.up.railway.app/"
+export const API_BASE = "https://personalsite-production-d831.up.railway.app"
 
 async function fetchData(){
     try {
-    const response = await fetch(`http://127.0.0.1:8000/photos`, {
+    const response = await fetch(`${API_BASE}/photos`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ async function fetchData(){
 
 async function fetchId(id){
     try {
-    const response = await fetch(`http://127.0.0.1:8000/photos/${id}`, {
+    const response = await fetch(`${API_BASE}/photos/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
