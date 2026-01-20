@@ -25,7 +25,7 @@ async function toggleStar(id, ev){
         //update starred database
         try {
           const response = await fetch(
-            API_BASE + `/photos/${Number(id)}/favorite`,
+            `${API_BASE}/photos/${Number(id)}/favorite`,
             {
               method: "PATCH",
               headers: {
@@ -56,7 +56,7 @@ async function toggleStar(id, ev){
         //update starred images
         try {
           const response = await fetch(
-            API_BASE + `/photos/${Number(id)}/favorite`,
+            `${API_BASE}/photos/${Number(id)}/favorite`,
             {
               method: "PATCH",
               headers: {
@@ -98,7 +98,7 @@ async function deleteImage(id, ev) {
 
   //delete from databases
   try {
-    const response = await fetch(API_BASE + `/photos/${Number(id)}`, {
+    const response = await fetch(`${API_BASE}/photos/${Number(id)}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -133,7 +133,7 @@ uploadForm.addEventListener('submit', async (e) => {
     const formData = new FormData(uploadForm);
 
     try{
-        const response = await fetch(API_BASE + "/upload", {
+        const response = await fetch(`${API_BASE}/upload`, {
             method: "POST",
             body: formData,
         });
