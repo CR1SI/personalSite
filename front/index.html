@@ -1,142 +1,107 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Photos By Cris</title>
+    <link href="output.css" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" size="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" size="192x192" href="assets/favicon-192x192.png">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+
+<body class="h-screen w-screen overflow-hidden antialiased bg-linear-to-t from-[#cbcaa5] via-[#7d9c9e] to-[#334d50] touch-none">
+    
+    <main class="relative flex h-screen w-screen flex-col bg-cover bg-center">
+        <div id="Blur" class="absolute inset-0 z-10 backdrop-blur-sm"></div>
+
+        <header id="Name" class="relative z-30 self-center flex items-center gap-4 py-8 text-sm font-bold tracking-widest text-white select-none md:text-lg">
+            <h1 class="drop-shadow-md uppercase">Cristian Padleski</h1>
+            <span class="opacity-50">|</span>
+            <a href="gallery.html" class="transition duration-150 ease-in-out hover:scale-110 active:scale-100 drop-shadow-xl">
+                GALLERY
+            </a>
+        </header>
+
+        <section id="AboutMe" class="absolute left-6 right-6 top-[20%] z-30 text-white select-none md:left-[10%] md:right-[55%] lg:top-[30%]">
+            <h2 class="mb-4 text-center font-thin tracking-widest drop-shadow-sm uppercase">About Me</h2>
+            <p class="text-center font-extralight leading-relaxed md:text-left">
+                Hi, I am a software developer who is constantly pushing myself to grow and build new things. Recently, however, I've decided to apply that same curiosity to the visual world by picking up a camera. I absolutely love traveling, and this site serves as the home for that adventure.
+            </p>
+        </section>
+
+        <div id="Pictures" 
+             draggable="false" 
+             class="absolute top-1/2 left-1/2 z-30 flex gap-6 select-none transition-transform duration-300"
+             style="transform: translate(0%, -65%);" 
+             data-mouse-down-at="0" 
+             data-prev-percentage="0" 
+             data-percentage="0">
+             </div>
+
+        <div id="modalScreen" draggable="false"
+            class="opacity-0 w-screen h-screen items-center justify-center fixed top-0 left-0 bg-black/50 z-200 hidden">
+            <div id="modal" draggable="false"
+                class="bg-white scale-0 opacity-0 flex shadow-2xl p-5 w-300 max-w-full pointer-events-auto select-none">
+                <div class="mr-5">
+                    <h1 id="imageTitle" class="text-left text-2xl">
+                    </h1>
+                    <h2 id="imageLocation">
+                    </h2>
+                    <br>
+                    <h1 id="imageDescription" class="text-left text-sm text-gray-700">
+                    </h1>
+                    <br>
+                    <div>
+                        <dl id="metaList" class="grid grid-cols-2 text-sm text-gray-700 gap-5">
+                            <dt>Camera</dt>
+                            <dd></dd>
         
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <title>Photos By Cris</title>
-        <link href="output.css" rel="stylesheet">
-
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-        <link rel="apple-touch-icon" size="180x180" href="assets/apple-touch-icon.png">
-        <link rel="icon" type="image/png" size="192x192" href="assets/favicon-192x192.png">
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-
-    </head>
-    <body class="antialiased overflow-hidden no-scrollbar h-screen w-screen bg-linear-to-t from-[#cbcaa5] via-[#7d9c9e] to-[#334d50] m-0 touch-none">
-        <div class="w-screen h-screen bg-center bg-cover relative flex flex-col">
-            <!-- blur -->
-            <div id="Blur" class="absolute inset-0 backdrop-blur-sm z-10"></div>
-
-            <!-- name -->
-            <div id="Name" class="relative self-center pl-10 pt-7 pb-7 flex gap-2 text-sm md:text-lg font-bold tracking-wide text-white z-30 select-none">
-                <h1 class="text-shadow-sm">CRISTIAN PADLESKI</h1>
-                <h1>|</h1>
-                <h1 class="hover:scale-110 transition ease-in-out duration-150 cursor-pointer active:scale-100 text-shadow-xl">
-                    <a href="gallery.html">
-                        GALLERY
-                    </a>
-                </h1>
-            </div>
-
-            <div id="AboutMe" class="text-white select-none z-30 absolute top-[30%] left-[10%] right-[60%]">
-                <h1 class="text-center font-thin mb-5 text-shadow-2xs">
-                    ABOUT ME
-                </h1>
-                <p class="text-center font-thin">
-                   Hi, I am a software developer who is constantly pushing myself to grow and build new things. Recently, however, I've decided to apply that same curiosity to the visual world by picking up a camera. I absolutely love traveling, and this site serves as the home for that adventure. These pages will host the moments I capture during my journey around the world, as well as my personal journey learning to take photos. Thank you for following along as I explore new places and new perspectives!
-                </p>
-            </div>
-
-            <!-- photo list -->
-            <div id="Pictures" draggable="false" style="transform: translate(0%, -65%);" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0" class="z-30 flex gap-4 absolute left-[50%] top-[50%] select-none">
-            </div>
-
-            <div id="modalScreen" draggable="false" class="opacity-0 w-screen h-screen items-center justify-center fixed top-0 left-0 bg-black/50 z-200 hidden">
-                <div id="modal" draggable="false" class="bg-white scale-0 opacity-0 flex shadow-2xl p-5 w-300 max-w-full pointer-events-auto select-none">
-                    <div class="mr-5">
-                        <h1 id="imageTitle" class="text-left text-2xl">
-                            SomeWhere Somewhen
-                        </h1>
-                        <h2 id="imageLocation">
-                            Miami, USA
-                        </h2>
-                        <br>
-                        <h1 id="imageDescription" class="text-left text-sm text-gray-700">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper elit vel est laoreet ultricies. Donec id turpis eget dolor gravida egestas.
-                        </h1>
-                        <br>
-                        <div>
-                            <dl id="metaList" class="grid grid-cols-2 text-sm text-gray-700 gap-5">
-                                <dt>Camera</dt>
-                                <dd>Canon Rebel T7</dd>
-
-                                <dt>Lens</dt>
-                                <dd>18.0-55.0mm f/3.5</dd>
-
-                                <dt>Focal Length</dt>
-                                <dd>55.0mm</dd>
-
-                                <dt>Aperture</dt>
-                                <dd>f/4.0</dd>
-
-                                <dt>Exposure Time</dt>
-                                <dd>1/250s</dd>
-
-                                <dt>ISO</dt>
-                                <dd>100</dd>
-
-                                <dt>Date Taken</dt>
-                                <dd>04/13/26</dd>
-                                
-                                <dt>Author</dt>
-                                <dd>Cristian Padleski</dd>
-
-                                <dt>File Size</dt>
-                                <dd>10.34MB</dd>
-
-                                <dt>Dimensions</dt>
-                                <dd>4000x5800</dd>
-                            </dl>
-                        </div>
+                            <dt>Lens</dt>
+                            <dd></dd>
+        
+                            <dt>Focal Length</dt>
+                            <dd></dd>
+        
+                            <dt>Aperture</dt>
+                            <dd></dd>
+        
+                            <dt>Exposure Time</dt>
+                            <dd></dd>
+        
+                            <dt>ISO</dt>
+                            <dd></dd>
+        
+                            <dt>Date Taken</dt>
+                            <dd></dd>
+        
+                            <dt>Author</dt>
+                            <dd></dd>
+        
+                            <dt>File Size</dt>
+                            <dd></dd>
+        
+                            <dt>Dimensions</dt>
+                            <dd></dd>
+                        </dl>
                     </div>
-                    <div class="flex-1 flex items-center justify-center rounded overflow-hidden">
-                        <img id="imageSrc" src="assets/testPhoto2.jpg" class="max-w-full max-h-[60vh] md:max-h-[75vh] w-auto h-auto object-contain shadow-sm">
-                    </div>
-                    
                 </div>
+                <div class="flex-1 flex items-center justify-center rounded overflow-hidden">
+                    <img id="imageSrc" src=""
+                        class="max-w-full max-h-[60vh] md:max-h-[75vh] w-auto h-auto object-contain shadow-sm" alt="loading">
+                </div>
+        
             </div>
         </div>
+    </main>
 
-        <!-- vines -->
-        <footer draggable="false" id="VinesContainer" class="absolute backdrop-brightness-50 -bottom-5 w-full z-5">
-            <img id="Vine" src="assets/vines.svg" class="brightness-110 w-full h-auto max-w-none">
-        </footer>
-        
-        <script type="module" src="index.js"></script>
-    </body>
+    <footer id="VinesContainer" draggable="false" class="absolute -bottom-5 z-5 w-full backdrop-brightness-75">
+        <img id="Vine" src="assets/vines.svg" class="w-full h-auto min-w-[120%] brightness-110">
+    </footer>
+    
+    <script type="module" src="index.js"></script>
+</body>
 </html>
-
-<!--
-npx @tailwindcss/cli -i style.css -o output.css --watch
-
-
-targeting data-> e.dataset.id...
-
-have to make sure every picture has an id to easily fetch from api later.
-flow -> user opens, site auto populates html, when user clicks an image it loads the modal based on id(it will pull id and load it all for that modal!)
-
-what I need api to return & store:
-{
-  "id": 3758,
-  "favorite": no,
-  "category": "Nature",
-  "title": "Mountain Sunrise",
-  "location": "Swiss Alps",
-  "description": "A cold morning hike worth every second.",
-  "imageSrc": "link post cloudinary",
-  "metadata": {
-    "Camera": "Canon Rebel T7",
-    "Lens": "18-55mm",
-    "Focal Length": "55mm",
-    "Aperture": "f/4.0",
-    "Exposure Time": "1/250s",
-    "ISO": "100",
-    "Date Taken": "04/13/26",
-    "Author": "Cristian Padleski",
-    "File Size": "54.3MB",
-    "Dimensions": "4000x5800"
-  }
-}
--->

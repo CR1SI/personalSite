@@ -1,4 +1,4 @@
-import { openModal, closeModal, populateModal, populatePicturesGallery} from "./crisiLibrary.js";
+import { openModal, closeModal, populateModal, populatePicturesGallery, resetModal} from "./crisiLibrary.js";
 
 const pics = document.getElementById("Pictures");
 const modalScreen = document.getElementById("modalScreen");
@@ -35,6 +35,7 @@ pics.addEventListener("click", (e) => {
 modalScreen.addEventListener('click', () => {
     isModalOpen = false;
     closeModal(modal, modalScreen);
+    resetModal();
 });
 
 /* --- Scroll Logic --- */

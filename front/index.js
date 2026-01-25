@@ -1,4 +1,4 @@
-import { openModal, closeModal, populateModal, populatePictures} from "./crisiLibrary.js";
+import { openModal, closeModal, populateModal, populatePictures, resetModal} from "./crisiLibrary.js";
 
 const pics = document.getElementById("Pictures");
 const vine = document.getElementById("Vine");
@@ -51,6 +51,7 @@ pics.addEventListener("click", (e) => {
 modalScreen.addEventListener('click', () => {
     isModalOpen = false;
     closeModal(modal, modalScreen);
+    resetModal();
 });
 //rest
 

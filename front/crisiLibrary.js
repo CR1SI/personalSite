@@ -193,6 +193,17 @@ export async function populateModal(photoID){
     })
 }
 
+export async function resetModal(){
+
+    document.getElementById("imageTitle").textContent = "";
+    document.getElementById("imageLocation").textContent = "";
+    document.getElementById("imageDescription").textContent = "";
+    document.getElementById("imageSrc").src = "";
+
+    const metaList = document.getElementById("metaList");
+    metaList.innerHTML = "";
+}
+
 export function openModal(modal, modalScreen){
     modalScreen.classList.replace('hidden', 'flex');
     requestAnimationFrame(() => {
